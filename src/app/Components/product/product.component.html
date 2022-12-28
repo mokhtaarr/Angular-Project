@@ -1,0 +1,55 @@
+<!-- افضل العروض -->
+
+<div id="carouselExampleControls"  data-bs-ride="carousel" style="cursor:pointer;">
+    <h4 class="text-end p-5">{{"Top offers" |translate}}</h4>
+      <div class="carousel-inner">
+
+        
+
+  <div class="row row-cols-1 row-cols-md-4 g-4" >
+
+    <div class="col" *ngFor="let prd of prdlist">
+      <div *ngIf="prd.discount>0">
+        <div class="card p-0">
+          <div class="d-flex justify-content-center">
+            <img  src={{prd.productImageList[0].path}}  style="width: 200px; height: 200px;" alt="...">
+          </div>
+        <div class="card-body">
+          <div *ngIf="currentCulture == 'ar'">
+            <div class="fs-5 fw-bold" >{{ prd.nameAR }}</div>
+          </div>
+          <div *ngIf="currentCulture == 'en'">
+            <div class="fs-5 fw-bold"  >{{ prd.nameEN }}</div>
+          </div>
+          <div >
+            <div class="price d-flex flex-row align-items-center"> 
+                <div class="text-danger ml-2"> <small class="dis-price">{{prd.unitPrice}} {{" EGP "|translate}}</small> <br> <span>{{"OFF"|translate}}%{{prd.discount}} </span> </div>
+                <br>
+                
+            </div>
+            <span class="act-price">{{prd.totalPrice}} {{" EGP "|translate}}</span>
+          </div>
+          <!-- <div *ngIf="prd.discount==0">
+                <div class="price d-flex flex-row align-items-center"> <span class="act-price">{{prd.totalPrice}} {{" EGP "|translate}}</span>
+                <div class="ml-2">  </div>
+            </div>
+          </div> -->
+          <br>
+          
+        </div>
+        <a class="btn btn-primary my-1"  (click)="AddToCart(prd)">{{"AddToCard"|translate}}</a>
+        <a class="btn btn-primary my-1"  (click)="OpenPrdDetails(prd.id)">{{"More Details"|translate}}</a>
+      </div>
+    </div>
+    </div>
+  </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>

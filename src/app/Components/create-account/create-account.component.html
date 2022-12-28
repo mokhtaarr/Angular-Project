@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-sm bg-light shadow p-3  bg-body rounded" style="direction:rtl">
+  <div class="container-fluid justify-content-center">
+    <a class="navbar-brand" href="#"><img src="assets\B-TechLogo.PNG" /></a>
+  </div>  
+
+  <div *ngIf="currentCulture=='ar'">
+    <span class="navbar-text" style="color: BLACK;font-size: small;margin-right: 10px; cursor: pointer;"
+      (click)="translate.use('en')">
+      English
+    </span>
+  </div>
+  <div *ngIf="currentCulture=='en'">
+    <span class="navbar-text" style="color: BLACK;font-size: small;cursor: pointer;"
+      (click)="translate.use('ar')">
+      عربي
+    </span>
+  </div>
+
+</nav>
+
+
+<div class="d-flex justify-content-center mt-5" >
+  <form  class="m-2 text-center" [formGroup]="userFormGroup" style="width: 70%;padding:10px; border: 1px solid rgb(209, 200, 200);"  >
+    <div class="mb-3">
+     
+      <input type="text" [(ngModel)]="newPrd.name"   class="form-control" name="usrName" [placeholder]="'Full Name'|translate" 
+      id="usrName" formControlName="fullName" [class.is-valid]="fullName?.valid" [class.is-invalid]="fullName?.invalid">
+        <div [hidden]="fullName?.valid || fullName?.untouched" class="alert alert-warning">
+        <small *ngIf="fullName?.errors?.['required']">Name is Required</small>
+        <small *ngIf="fullName?.errors?.['minlength']">Name must be 3 letters at least</small>
+        </div>
+    </div>
+  
+    <div class="mb-3">
+      <input type="email" class="form-control" [placeholder]="'Email'|translate" name="usrEmail" id="usrEmail" formControlName="email"  [(ngModel)]="newPrd.email">
+      <div [hidden]="email?.valid || email?.untouched" class="alert alert-warning">
+        <small *ngIf="email?.errors?.['required']">Email is Required</small>
+     </div>
+    </div>
+  
+   
+   
+      <div class="mb-3 ms-4">
+        <input [(ngModel)]="newPrd.mobileNo" [placeholder]="'MobileNo'|translate" type="number" formControlName="mobileNo" class="form-control" name="usrMobile"
+        id="usrMobile"  > 
+        <div [hidden]="mobileNo.valid || mobileNo.untouched" class="alert alert-warning">
+          <small *ngIf="mobileNo?.errors?.['required']">Mobile Number is Required</small>
+          </div>
+      </div>
+    
+    <div class="mb-3">
+      <input type="text" class="form-control" [placeholder]="'Address'|translate" name="usradd" id="usradd" formControlName="address"  [(ngModel)]="newPrd.address">
+      <div [hidden]="address?.valid || address?.untouched" class="alert alert-warning">
+        <small *ngIf="address?.errors?.['required']">address is Required</small>
+    </div>
+    </div>
+  
+    <div class="mb-3">
+      <input type="password" [placeholder]="'Password'|translate" class="form-control" name="usrPass" id="usrPass" formControlName="password" >
+      <div [hidden]="password?.valid || password?.untouched" class="alert alert-warning">
+        <small *ngIf="password?.errors?.['required']">Password is Required</small>
+        <small *ngIf="password?.errors?.['minlength']">Password must be 6 letters at least</small>
+        </div>
+    </div>
+  
+    <div class="mb-3">
+      <input type="password" [placeholder]="'Retry Password'|translate"  class="form-control" name="usrRePass" id="usrRePass" formControlName="repassword">
+    </div>
+  
+  <br>
+    <button type="submit" class="btn btn-success" routerLink="/LogIn" [disabled]="userFormGroup.invalid" style="width: 100px;" (click)="AddUser()">{{"sign up"|translate}}</button>
+    <br>
+  </form>
+  
+</div>
+
+

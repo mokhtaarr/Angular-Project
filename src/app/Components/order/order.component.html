@@ -1,0 +1,102 @@
+<app-header></app-header>
+
+<div *ngIf="length != 0">
+    <div class="row" style="margin: 20px">
+        <div class="xl-col-6 sm-col-9">
+            <p class="d-flex justify-content-center fs-4">
+                {{ "Your Order has been requested successfully" | translate }}
+            </p>
+            <br />
+            <p class="d-flex justify-content-center fs-4">
+                {{ "It will be arrive at" | translate }} {{ Address }}
+            </p>
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-primary" routerLink="/Home">{{
+                    "Back to home" | translate
+                    }}</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div >
+        <table class="table" style="width: 90%;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                    <th scope="col">{{ "Name" | translate }}</th>
+                    <th scope="col">{{ "Quantity" | translate }}</th>
+                    <th scope="col">{{ "Unit Price" | translate }}</th>
+                    <th scope="col">{{ "Total price" | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="" *ngFor="let data of items; let i = index">
+                <th>{{ i + 1 }}</th>
+                <td>{{ data.nameAR }}</td>
+                <td>{{ data.quantity }}</td>
+                <td>{{ data.totalPrice }}</td>
+                <td>{{ data.totalPrice * data.quantity }}</td>
+
+            </tbody>
+          </table>
+
+        <div class="">
+            <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                {{ "Delete Order" | translate }}
+            </button>
+            <a class="btn btn-warning m-1" routerLink="/update">{{
+                "Update Order" | translate
+                }}</a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    {{ "Confirm Deleting" | translate }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ "Are You sure you want to delete the order" | translate }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                    {{ "Cancel" | translate }}
+                </button>
+                <button type="button" class="btn btn-danger" (click)="deleteOrder()">
+                    {{ "Delete" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content if no item in Shopping cart -->
+<div *ngIf="length == 0">
+    <div class="container-fluid mt-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130"
+                                class="img-fluid mb-4 mr-3" />
+                            <h3><strong>{{"Your Don't Have any Orders Yet"|translate}}</strong></h3>
+                            <h4>{{" You Can choice From Our Product"|translate}}</h4>
+                            <a routerLink="/Home" class="btn btn-primary cart-btn-transform m-3"
+                                data-abc="true"> {{"shopping"|translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<app-footer></app-footer>

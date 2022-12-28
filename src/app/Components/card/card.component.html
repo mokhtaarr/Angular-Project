@@ -1,0 +1,119 @@
+<app-header></app-header>
+
+
+<div *ngIf="length != 0">
+  <div class="row" style="margin: 20px"  *ngFor="let data of item; let i = index">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <div *ngIf="currentCulture == 'ar'">
+            <div class="d-flex">
+              <div style="font-weight: bold; margin: 3px;">{{"Product Name"|translate}} : </div>
+              <div style="margin: 3px;"> {{ data.nameAR }}</div>
+            </div>
+          </div>
+          <div *ngIf="currentCulture == 'en'">
+            <div class="d-flex">
+              <div style="font-weight: bold; margin: 3px;">{{"Product Name"|translate}} : </div>
+              <div style="margin: 3px;"> {{ data.nameEN }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-12 col-sm-12">
+          <img
+            src={{data.productImageList[0].path}}
+            class="img-fluid"
+            style="height: 100px"
+          />
+        </div>
+
+        <div class="col-lg-2 col-md-12 col-sm-12">
+         <div class="d-flex">
+          <div style="font-weight: bold; margin: 3px;"> {{"Product Price"|translate}} : </div>
+          <div style="margin: 3px;"> {{ data.totalPrice }}</div>
+         </div>
+        </div>
+        <div class="col-lg-2 col-md-12 col-sm-12">
+          <label style="margin: 3px;font-weight: bold;">العدد</label>
+          <input style="width: 70px;margin: 3px;"
+            type="number"
+            [(ngModel)]="item[i].quantity"
+            (ngModelChange)="calcTotalPrice()"
+            
+          />
+        </div>
+        <div class="col-lg-2 col-md-12 col-sm-12">
+          <h6 >
+            {{"Total price"|translate}} : {{ item[i].quantity * data.totalPrice }}
+          </h6>
+        </div>
+        <hr />
+
+      </div>
+  <div>
+    <label class="m-1" for="TotalPrice"> {{"Order Total Price"|translate}}</label>
+    <input class="m-1" type="text" id="TotalPrice" [(ngModel)]="TotalPrice"  />
+  </div>
+ 
+  <form name="myForm" ng-controller="ExampleController">
+  <label class="btn btn-primary m-1">
+    <input type="radio" class="btn"  name="pay" [(ngModel)]="paymentMethod" value="visa">
+    {{
+      "Credit" | translate
+    }}
+  </label>
+  <label class="btn btn-primary m-1">
+    <input type="radio" class="btn" name="pay" [(ngModel)]="paymentMethod" value="cash">
+    {{
+      "Cash" | translate
+    }}
+  </label>
+  </form>
+  <div class="d-flex justify-content-end" style="margin: 20px">
+    
+    <button
+      class="btn btn-primary"
+      style="width: 200px"
+      (click)="OrderSubmit()"
+    >
+      {{ "Buy Now" | translate }}
+    </button>
+  </div>
+  <div class="d-flex justify-content-end" style="margin: 20px"></div>
+</div>
+
+
+
+
+
+
+
+<!-- Content if no item in Shopping cart -->
+<div *ngIf="length == 0">
+  <div class="container-fluid mt-100">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body cart">
+            <div class="col-sm-12 empty-cart-cls text-center">
+              <img
+                src="https://i.imgur.com/dCdflKN.png"
+                width="130"
+                height="130"
+                class="img-fluid mb-4 mr-3"
+              />
+              <h3><strong>{{"Your Cart is Empty"|translate}}</strong></h3>
+              <h4>{{" You Can choice From Our Product"|translate}}</h4>
+              <a
+                routerLink="/Home"
+                class="btn btn-primary cart-btn-transform m-3"
+                data-abc="true"
+                > {{"shopping"|translate}}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

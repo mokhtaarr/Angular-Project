@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+  <div class=" d-flex justify-content-center Col-lg-12 col-md-12 col-sm-12"> 
+    <div>
+      <label>{{"price from"|translate}}</label>
+      <input   type="number" placeholder="Price From"  [(ngModel)]="PriceFrom" class="form-control" />  
+    </div>
+    <div style="margin-right: 10px;">
+      <label>{{"price into"|translate}}</label>
+      <input   type="number" placeholder="Price Into"  [(ngModel)]="Priceto" class="form-control" />  
+    </div>
+  
+    <button (click)="filterProduct()" class="btn btn-primary" style="height: 50px;margin: 20px">{{"Filter"|translate}}</button>
+  </div>
+  
+  <div class="row row-cols-1 row-cols-md-4 g-4 " style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+  
+      <div class="col" *ngFor="let prd of prdOfferlist">
+        <div class="card p-0">
+          <img style="width: auto; height:200px ;" src={{prd.productImageList[0].path}}  class="card-img-top" alt="...">
+          <div class="card-body">
+            <div *ngIf="currentCulture == 'ar'">
+              <div class="fs-5 fw-bold" >{{ prd.nameAR }}</div>
+            </div>
+            <div *ngIf="currentCulture == 'en'">
+              <div class="fs-5 fw-bold"  >{{ prd.nameEN }}</div>
+            </div>
+            <div >
+              <div class="price d-flex flex-row align-items-center"> 
+                  <div class="text-danger ml-2"> <small class="dis-price">{{prd.unitPrice}} {{" EGP "|translate}}</small> <br> <span>{{"OFF"|translate}}%{{prd.discount}} </span> </div>
+                  <br>
+                  
+              </div>
+              <span class="act-price">{{prd.totalPrice}} {{" EGP "|translate}}</span>
+            </div>
+            <!-- <div *ngIf="prd.discount==0">
+                  <div class="price d-flex flex-row align-items-center"> <span class="act-price">{{prd.totalPrice}} {{" EGP "|translate}}</span>
+                  <div class="ml-2">  </div>
+              </div>
+            </div> -->
+            <br>
+            
+          </div>
+          <a class="btn btn-primary my-1"  (click)="AddToCart(prd)">{{"AddToCard"|translate}}</a>
+          <a class="btn btn-primary my-1"  (click)="OpenPrdDetails(prd.id)">{{"More Details"|translate}}</a>
+        </div>
+      </div>
+    </div>  
+</div>

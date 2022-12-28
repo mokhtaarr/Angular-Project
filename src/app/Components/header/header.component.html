@@ -1,0 +1,112 @@
+<!-- first navBar -->
+<div class="sticky-top ">
+
+  <nav class="navbar navbar-expand-lg bg-black " style="height:40px ;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="color: white;font-size: small;"> <i class="fa fa-phone"
+          aria-hidden="true">19966</i>{{"Call me"|translate}}</a>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="#"
+              style="color: white;font-size: small;">{{"blog"|translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: white;font-size: small;">{{"Sell ​​on btech"|translate}}</a>
+          </li>
+
+        </ul>
+        <span class="navbar-text" style="color: white;margin-right: 15px;font-size: small;">
+          {{"Delivery area: Cairo"|translate}}
+        </span>
+        <div *ngIf="currentCulture=='ar'">
+          <span class="navbar-text" style="color: white;font-size: small;margin-right: 10px; cursor: pointer;"
+            (click)="translate.use('en')">
+            English
+          </span>
+        </div>
+        <div *ngIf="currentCulture=='en'">
+          <span class="navbar-text" style="color: white;font-size: small;cursor: pointer;"
+            (click)="translate.use('ar')">
+            عربي
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Second Nav Bar -->
+
+
+  <nav class="navbar navbar-expand-sm bg-light shadow p-3  bg-body rounded" style="direction:rtl">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="assets\B-TechLogo.PNG" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              style="font-weight: bold;">{{"categories"|translate}}</a>
+            <ul class="dropdown-menu">
+              <li *ngFor="let cat of catlist" [value]="cat.id" style="cursor:pointer;">
+
+                <a class="dropdown-item" (click)="OpenPrdByCatId(cat.id)">
+                  <div *ngIf="currentCulture=='ar'"> {{cat.nameAR}}</div>
+                  <div *ngIf="currentCulture=='en'"> {{cat.nameEN}}</div>
+                </a>
+
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: rgb(182, 8, 8);font-weight:bold ;">{{"Black Friday offers"|translate}}</a>
+          </li>
+        </ul>
+        
+          <!-- <input class="form-control me-2" type="text" placeholder="" style="background-color: rgb(228, 226, 226);"> -->
+          <ul class="navbar-nav "style="width: 40%; height: 60%;">
+
+            <li class="nav-item dropdown" style="width: 100%; height: 60%;" >
+              <a class="nav-link active"  role="button" data-bs-toggle="dropdown" 
+                style="font-weight: bold;"><input class="form-control me-2" type="text"  #inputString (keyup)="filterByName(inputString.value)" placeholder="Search" style="background-color: rgb(228, 226, 226);">
+              </a>
+             
+              <ul class="dropdown-menu ">
+                <li *ngFor="let prd of searchItems" [value]="prd.id" style="cursor:pointer;">
+  
+                  <a class="dropdown-item " (click)="OpenPrdDetails(prd.id)">
+                    <div *ngIf="searchLanguage=='ar'"> {{prd.nameAR}}</div>
+                    <div *ngIf="searchLanguage=='en'"> {{prd.nameEN}}</div>
+                  </a>
+  
+                </li>
+              </ul>
+            </li>
+          </ul>
+     
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/LogIn" style="font-weight:bold;"> <i class="fa fa-user-o"
+                aria-hidden="true" style="font-weight:bold;"></i> {{"My Account"|translate}}</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" style="font-weight:bold;" routerLink="/card"> <i class="fa fa-shopping-cart"
+                aria-hidden="true" style="font-weight:bold;"></i> {{"my purchases"|translate}}</a>
+          </li>
+       
+
+        <li class="nav-item">
+          <i ></i>
+          <a class="nav-link" routerLink="/Order" style="font-weight:bold;"> <i class="fa fa-bag"
+              aria-hidden="true" style="font-weight:bold;"></i> <i class="fa fa-shopping-bag" aria-hidden="true"></i>{{"My Order"|translate}}</a>
+        </li>
+       </ul>
+      </div>
+    </div>
+  </nav>
+</div>
